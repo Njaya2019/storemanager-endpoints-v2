@@ -1,0 +1,1 @@
+# storemanager-endpoints-v2
