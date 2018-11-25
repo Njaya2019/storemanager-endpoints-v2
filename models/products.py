@@ -10,7 +10,6 @@ class products():
         self.p_name= p_name
         self.price= price
         self.quantity= quantity
-        self.p_id= len(self.products_list) + 1
 
     def add_product(self):
         insert_sql="""INSERT INTO products(product_name,product_price,product_qty) VALUES(%s,%s,%s)"""
