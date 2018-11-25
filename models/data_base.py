@@ -1,5 +1,6 @@
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+import psycopg2.extras as p_extras
 
 class DataBase():
     
@@ -27,7 +28,7 @@ class DataBase():
                 self.con_nection.close()
     def connect_to_store_db(self):
         con=psycopg2.connect(dbname='store_db', user='postgres', host='localhost', password='a1990n')
-        cur=con.cursor()
+        cur=con.cursor(cursor_factory=p_extras.DictCursor)
         return cur, con
     def create_db_tables(self):
         tables=(
@@ -62,8 +63,3 @@ class DataBase():
             con.commit()
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
-
-if __name__=='__main__':
-    d=DataBase()
-    print(d.create_database())
-    d.create_db_tables()

@@ -1,14 +1,13 @@
 from flask import Flask
-from views.views import admin_app, attendant_app, admin_sales_app
-from admin.view_add_user import login_app
+from views.views import admin_app
+from models.data_base import DataBase
 app=Flask(__name__)
 
-
+db=DataBase()
 
 app.register_blueprint(admin_app)
-app.register_blueprint(attendant_app)
-app.register_blueprint(admin_sales_app)
-app.register_blueprint(login_app)
 
 if __name__=='__main__':
+    db.create_database()
+    db.create_db_tables()
     app.run(debug=True)

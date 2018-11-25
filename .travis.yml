@@ -10,8 +10,8 @@ install:
  - pip install pytest pytest-cov
 
 before_install:
- - git clone -b ch-validate-strings-keys-161442861 https://github.com/Njaya2019/storemanager-endpoints.git
- - cd storemanager-endpoints 
+ - git clone -b develope https://github.com/Njaya2019/storemanager-endpoints-v2.git
+ - cd storemanager-endpoints-v2
  
 script:
  - pytest --cov=.
