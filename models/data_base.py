@@ -58,7 +58,6 @@ class DataBase():
                 cur.execute(table)
                 print('TABLE CREATED')
             # close communication with the PostgreSQL database server
-            cur.close()
             # commit the changes
             con.commit()
         except (Exception, psycopg2.DatabaseError) as error:
