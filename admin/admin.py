@@ -20,8 +20,6 @@ class admin(MethodView):
     def post(self,current_user_id):
         #u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
         #u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
-        if not request.json:
-            abort(400)
         pro_name=request.json['product_name']
         pro_price=request.json['price']
         pro_qty=request.json['quantity']
