@@ -12,11 +12,12 @@ class Test_admin:
     def cli_ent(self):
         client=app.test_client()
         return client
+        
     @pytest.fixture
     def generate_token(self,cli_ent):
         cli_ent.post('/api/v1/admin/signup', data=json.dumps(dict(user_fullname="Andrew Njaya",user_email="njayaandrew@gmail.com",user_role="Admin",user_password="1234",user_confirm_pwd="1234")), content_type="application/json")
         rv=cli_ent.post('/api/v1/admin/login', data=json.dumps(dict(user_email="njayaandrew@gmail.com",user_password="1234")), content_type="application/json")
-        data=json.loads(rv.data.decode())
+        data=json.loads(rv.data)
         token=data['token']
         return token
 
