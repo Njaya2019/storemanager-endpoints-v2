@@ -12,6 +12,7 @@ install:
 services:
  - postgresql
 
+ 
 before_install:
  - psql -c 'ALTER USER postgres WITH PASSWORD 'a1990n';'
  - psql -c 'create database store_db;' -U postgres
