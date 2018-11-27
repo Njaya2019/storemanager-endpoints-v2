@@ -1,8 +1,9 @@
 from models.data_base import DataBase
 import psycopg2
-d_b=DataBase()
-cur_con=d_b.connect_to_store_db()
+
 class products():
+    d_b=DataBase()
+    cur_con=d_b.connect_to_store_db()
     cur=cur_con[0]
     con=cur_con[1]
     products_list=[]
