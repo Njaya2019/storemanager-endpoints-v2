@@ -50,9 +50,9 @@ class Test_admin:
         assert response.status_code==200
         assert data=={'Products':admin.p.get_products()}
 
-    def test_get_one_product(self,cli_ent,generate_token):
-        headers = {'X-APP-SECRET': '{}'.format(generate_token)}
-        response=cli_ent.get('/api/v1/admin/products/'+str(1),headers=headers)
+    def test_get_one_product(self,cli_ent):
+       
+        response=cli_ent.get('/api/v1/admin/products/'+str(1))
         data=json.loads(response.data.decode())
         assert response.status_code==200
         assert data=={'Product':admin.p.get_a_product(product_id=1)}

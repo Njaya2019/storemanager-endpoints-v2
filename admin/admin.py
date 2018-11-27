@@ -18,7 +18,7 @@ class admin(MethodView):
             return jsonify({'Product':requested_product}), 200
     
     def post(self,current_user_id):
-        u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
+        #u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
         #u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
         if not request.json:
             abort(400)
@@ -29,8 +29,8 @@ class admin(MethodView):
             return jsonify({'message':'Please provide valid strings or integers'})
         if not pro_name or not pro_price or not pro_qty:
             return jsonify({'message':'Please provide all values'})
-        self.p=products(pro_name,pro_price, pro_qty)
-        msg=self.p.add_product()
+        pr=products(pro_name,pro_price, pro_qty)
+        msg=pr.add_product()
         return jsonify({'message':msg}), 200
     def put(self,product_id):
         
