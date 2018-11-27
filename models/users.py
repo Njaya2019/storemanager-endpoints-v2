@@ -19,7 +19,7 @@ class users():
         self.user_id=len(users.users_list)+1
     
     def add_user(self):
-        get_all_users_psql="""SELECT * FROM users WHERE user_email=%s"""
+        get_all_users_psql="SELECT * FROM users WHERE user_email=%s"
         email=[self.email]
         self.cur.execute(get_all_users_psql,email)
         email_exists=self.cur.fetchone()
@@ -28,7 +28,7 @@ class users():
         if email_exists==None:
             if self.password==self.confirm_pwd:
                 hashed_pswd = generate_password_hash(self.password,method='sha256')
-                add_user_psql="""INSERT INTO users(user_fullname,user_email,user_role,user_password) VALUES(%s,%s,%s,%s)"""
+                add_user_psql="INSERT INTO users(user_fullname,user_email,user_role,user_password) VALUES(%s,%s,%s,%s)"
                 self.cur.execute(add_user_psql,(self.full_name,self.email,self.role,hashed_pswd))
                 self.con.commit()
                 return 'The store attendant has been registered'   
@@ -36,7 +36,7 @@ class users():
                 return 'Passwords do not match'  
 
     def get_users(self):
-        users_query="""SELECT * FROM users"""
+        users_query="SELECT * FROM users"
         self.cur.execute(users_query)
         users_table_rows=self.cur.fetchall()
         if users_table_rows:
@@ -45,7 +45,7 @@ class users():
             return 'There are no users yet'
     
     def get_a_user(self,userid):
-        user_query="""SELECT * FROM users WHERE userid=%s"""
+        user_query="SELECT * FROM users WHERE userid=%s"
         self.cur.execute(user_query,[userid])
         user=self.cur.fetchone()
         if user:
@@ -54,7 +54,7 @@ class users():
             return "The product wasn\'t found."       
     
     def login_user(self,email,password):
-        login_query="""SELECT * FROM users WHERE user_email=%s"""
+        login_query="SELECT * FROM users WHERE user_email=%s"
         self.cur.execute(login_query,[email])
         login_user=self.cur.fetchone()
         if login_user:
