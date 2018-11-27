@@ -2,10 +2,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.data_base import DataBase
-d_b=DataBase()
-cur_con=d_b.connect_to_store_db()
+
 #from application import app
 class users():
+    d_b=DataBase()
+    cur_con=d_b.connect_to_store_db()
     cur=cur_con[0]
     con=cur_con[1]
     users_list=[]
