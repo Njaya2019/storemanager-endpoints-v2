@@ -8,7 +8,7 @@ from admin.admin import admin
 
 class Test_admin:
     
-    @pytest.fixture
+    @pytest.fixture(scope='module')
     def cli_ent(self):
         client=app.test_client()
         return client
