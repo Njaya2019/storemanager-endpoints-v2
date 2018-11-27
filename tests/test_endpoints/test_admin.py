@@ -14,9 +14,8 @@ class Test_admin:
         return client
     @pytest.fixture
     def generate_token(self,cli_ent):
-        u=users(full_name='Andrew Njaya',email='njayaandrew@hotmail.com',role='Admin',password='1234',confirm_pwd='1234')
-        u.add_user()
-        rv=cli_ent.post('api/v1/admin/login', data=json.dumps(dict(user_email='njayaandrew@gmail.com',user_password='1234')), content_type="application/json")
+        cli_ent.post('/api/v1/admin/signup', data=json.dumps(dict(user_name='Andrew Njaya',user_email='njayaandrew@gmail.com',user_role='Admin',user_password='1234',user_confirm_pwd='1234')), content_type="application/json")
+        rv=cli_ent.post('/api/v1/admin/login', data=json.dumps(dict(user_email='njayaandrew@gmail.com',user_password='1234')), content_type="application/json")
         data=json.loads(rv.data)
         token=data['token']
         return token
