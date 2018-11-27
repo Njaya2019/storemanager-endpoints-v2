@@ -16,7 +16,7 @@ class Test_admin:
     def generate_token(self,cli_ent):
         cli_ent.post('/api/v1/admin/signup', data=json.dumps(dict(user_fullname="Andrew Njaya",user_email="njayaandrew@gmail.com",user_role="Admin",user_password="1234",user_confirm_pwd="1234")), content_type="application/json")
         rv=cli_ent.post('/api/v1/admin/login', data=json.dumps(dict(user_email="njayaandrew@gmail.com",user_password="1234")), content_type="application/json")
-        data=json.loads(rv.data)
+        data=json.loads(rv.data.decode())
         token=data['token']
         return token
 
@@ -29,7 +29,7 @@ class Test_admin:
         headers = {'X-APP-SECRET': '{}'.format(generate_token)}
         response=cli_ent.post('/api/v1/admin/products',headers=headers,data=json.dumps(dict(product_name="Timberland shoes",
         price=40,quantity=10)), content_type="application/json")
-        data=json.loads(response.data)
+        data=json.loads(response.data.decode())
         assert response.status_code==200
         assert "The product has been added" in data["message"]
 
@@ -37,27 +37,27 @@ class Test_admin:
         headers = {'X-APP-SECRET': '{}'.format(generate_token)}
         empty_response=cli_ent.post('/api/v1/admin/products',headers=headers,data=json.dumps(dict(product_name='',
         price=40,quantity=10)), content_type="application/json")
-        empty_data=json.loads(empty_response.data)
+        empty_data=json.loads(empty_response.data.decode())
         assert "Please provide all values" in empty_data["message"]
         
     def test_post_invalid_values(self,cli_ent,generate_token):
         headers = {'X-APP-SECRET': '{}'.format(generate_token)}
         invalid_response=cli_ent.post('/api/v1/admin/products',headers=headers,data=json.dumps(dict(product_name=123,
         price=40,quantity=10)), content_type="application/json")
-        invalid_data=json.loads(invalid_response.data)
+        invalid_data=json.loads(invalid_response.data.decode())
         assert "Please provide valid strings or integers" in invalid_data["message"]
 
 
     def test_get(self,cli_ent,generate_token):
         headers = {'X-APP-SECRET': '{}'.format(generate_token)}
         response=cli_ent.get('/api/v1/admin/products',headers=headers)
-        data=json.loads(response.data)
+        data=json.loads(response.data.decode())
         assert response.status_code==200
         assert data=={'Products':admin.p.get_products()}
 
     def test_get_one_product(self,cli_ent,generate_token):
         headers = {'X-APP-SECRET': '{}'.format(generate_token)}
         response=cli_ent.get('/api/v1/admin/products/'+str(1),headers=headers)
-        data=json.loads(response.data)
+        data=json.loads(response.data.decode())
         assert response.status_code==200
         assert data=={'Product':admin.p.get_a_product(product_id=1)}
