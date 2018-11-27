@@ -1,7 +1,9 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from models.products import cur_con
+from models.data_base import DataBase
+d_b=DataBase()
+cur_con=d_b.connect_to_store_db()
 #from application import app
 class users():
     cur=cur_con[0]
