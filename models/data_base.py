@@ -5,7 +5,7 @@ import psycopg2.extras as p_extras
 class DataBase():
     
     def __init__(self):
-        self.con_nection=psycopg2.connect(dbname='postgres', user='postgres', host='localhost', password='a1990n')
+        self.con_nection=psycopg2.connect(dbname='postgres', user='postgres', host='localhost', password='')
         self.cursor=self.con_nection.cursor()
 
  
