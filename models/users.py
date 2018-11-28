@@ -2,22 +2,20 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
 from models.data_base import DataBase
+d_b=DataBase()
 
 #from application import app
 class users():
-    d_b=DataBase()
-    cur_con=d_b.connect_to_store_db()
-    cur=cur_con[0]
-    con=cur_con[1]
-    users_list=[]
-
+    
     def __init__(self,full_name,email,role,password,confirm_pwd):
         self.full_name=full_name
         self.email=email
         self.role=role
         self.password=password
         self.confirm_pwd=confirm_pwd
-        self.user_id=len(users.users_list)+1
+        self.cur_con=d_b.connect_to_store_db()
+        self.cur=self.cur_con[0]
+        self.con=self.cur_con[1]
     
     def add_user(self):
         get_all_users_psql="SELECT * FROM users WHERE user_email=%s"

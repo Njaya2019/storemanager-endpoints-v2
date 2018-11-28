@@ -1,16 +1,15 @@
 from models.data_base import DataBase
 import psycopg2
-
+d_b=DataBase()
 class products():
-    d_b=DataBase()
-    cur_con=d_b.connect_to_store_db()
-    cur=cur_con[0]
-    con=cur_con[1]
-    products_list=[]
+    
     def __init__(self, p_name, price, quantity):
         self.p_name= p_name
         self.price= price
         self.quantity= quantity
+        self.cur_con=d_b.connect_to_store_db()
+        self.cur=self.cur_con[0]
+        self.con=self.cur_con[1]
 
     def add_product(self):
         insert_sql="""INSERT INTO products(product_name,product_price,product_qty) VALUES(%s,%s,%s)"""

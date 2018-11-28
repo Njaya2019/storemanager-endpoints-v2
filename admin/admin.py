@@ -17,7 +17,7 @@ class admin(MethodView):
             requested_product=self.p.get_a_product(product_id)
             return jsonify({'Product':requested_product}), 200
     
-    def post(self,current_user_id):
+    def post(self):
         #u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
         #u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
         pro_name=request.json['product_name']
