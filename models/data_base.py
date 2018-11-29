@@ -27,7 +27,7 @@ class DataBase():
             if self.con_nection is not None:
                 self.con_nection.close()
     def connect_to_store_db(self):
-        con=psycopg2.connect(dbname='postgres', user='postgres', host='localhost', password='a1990n')
+        con=psycopg2.connect(dbname='store_db', user='postgres', host='localhost', password='a1990n')
         cur=con.cursor(cursor_factory=p_extras.DictCursor)
         return cur, con
     def create_db_tables(self):

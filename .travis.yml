@@ -13,7 +13,7 @@ services:
  - postgresql
 
 before_install:
- - psql -c 'CREATE USER post WITH PASSWORD 'a1990n';'
+ - cp config/database.yml.travis config/.travis.yml
  - psql -c 'CREATE DATABASE store_db;' -U postgres
  - psql -c 'GRANT ALL PRIVILEGES ON DATABASE store_db to postgres;' -U postgres
  - psql -c 'CREATE TABLE IF NOT EXISTS products(product_id SERIAL PRIMARY KEY,product_name VARCHAR(255) NOT NULL,product_price INT NOT NULL,product_qty INT NOT NULL);' -U postgres
