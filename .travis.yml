@@ -13,7 +13,7 @@ services:
  - postgresql
 
 before_install:
- - psql -c 'CREATE ROLE postgres WITH SUPERUSER LOGIN PASSWORD 'a1990n';' -U postgres
+ - psql -c 'CREATE ROLE postgres WITH SUPERUSER LOGIN PASSWORD a1990n;' -U postgres
  - psql -c 'CREATE DATABASE store_db;' -U postgres
  - psql -c 'CREATE TABLE IF NOT EXISTS products(product_id SERIAL PRIMARY KEY,product_name VARCHAR(255) NOT NULL,product_price INT NOT NULL,product_qty INT NOT NULL);' -U postgres
  - psql -c 'CREATE TABLE IF NOT EXISTS sales(sale_id SERIAL PRIMARY KEY,attendant_id INT NOT NULL,product_id INT NOT NULL,sale_quantity INT NOT NULL,tnx_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);' -U postgres
