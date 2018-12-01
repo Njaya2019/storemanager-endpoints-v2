@@ -25,7 +25,6 @@ class Test_admin:
 
      
     def test_post(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         response=cli_ent.post('/api/v1/admin/products',headers=headers,data=json.dumps(dict(product_name='Timberland shoes',
         price=40,quantity=10)), content_type="application/json")
@@ -34,7 +33,6 @@ class Test_admin:
         assert "The product has been added" in data["message"]
 
     def test_post_empty_string(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         empty_response=cli_ent.post('/api/v1/admin/products',headers=headers,data=json.dumps(dict(product_name='',
         price=40,quantity=10)), content_type="application/json")
@@ -43,7 +41,6 @@ class Test_admin:
         
 
     def test_post_invalid_values(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         invalid_response=cli_ent.post('/api/v1/admin/products',headers=headers,data=json.dumps(dict(product_name=123,
         price=40,quantity=10)), content_type="application/json")
@@ -51,7 +48,6 @@ class Test_admin:
         assert "Please provide valid strings or integers" in invalid_data["message"]
 
     def test_get(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         response=cli_ent.get('/api/v1/admin/products',headers=headers)
         data=json.loads(response.data)
@@ -59,7 +55,6 @@ class Test_admin:
         assert data=={'Products':admin.p.get_products()}
 
     def test_get_one_product(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         response=cli_ent.get('/api/v1/admin/products/'+str(1),headers=headers)
         data=json.loads(response.data)
@@ -67,16 +62,14 @@ class Test_admin:
         assert data=={'Product':admin.p.get_a_product(product_id=1)}
     
     def test_put(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
-        response=cli_ent.put('/api/v1/admin/products/'+str(2),headers=headers,data=json.dumps(dict(product_name='Iphone 8',price=900,quantity=20)), content_type="application/json")
+        response=cli_ent.put('/api/v1/admin/products/'+str(1),headers=headers,data=json.dumps(dict(product_name='Iphone 8',price=900,quantity=20)), content_type="application/json")
         data=json.loads(response.data)
         assert response.status_code==200
         assert data=={'product_updated':[2,'Iphone 8',900]}
     
     
     def test_delete(self,cli_ent,generate_token):
-        token=jwt.encode({'user_id':1, 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         response=cli_ent.delete('/api/v1/admin/products/'+str(8),headers=headers)
         data=json.loads(response.data)

@@ -62,3 +62,12 @@ class DataBase():
             con.commit()
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
+    
+    
+    def drop_tables(self):
+        drop_tables=""" DROP TABLE IF EXISTS products,sales,users CASCADE;"""
+        try:
+            self.cursor.execute(drop_tables)
+            print('tables droped')
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)

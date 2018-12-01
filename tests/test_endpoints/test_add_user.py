@@ -2,8 +2,7 @@ import unittest, json, pytest
 from application import app
 from models.products import products
 from models.users import users
-import jwt
-import datetime
+from models.data_base import DataBase
 import psycopg2
 import psycopg2.extras as p_extras
 from werkzeug.security import generate_password_hash
@@ -24,13 +23,16 @@ class Test_add_user:
         rv=cli.post('/api/v1/admin/login', data=json.dumps(dict(user_email='njayaandrew@companyname.com',user_password='1234')), content_type="application/json")
         data=json.loads(rv.data)
         token=data['token']
-        return token
+        yield token
+        db=DataBase()
+        db.drop_tables()
+
 
 
     def test_post_user(self,cli,generate_token):
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         response=cli.post('/api/v1/admin/signup',headers=headers,data=json.dumps(dict(user_fullname='Darius ndubi',
-        user_email='njayaandrew@andela.com',user_role='attendant',user_password='1234',user_confirm_pwd='1234')), content_type="application/json")
+        user_email='njayaandrew@and.com',user_role='attendant',user_password='1234',user_confirm_pwd='1234')), content_type="application/json")
         data=json.loads(response.data)
         assert response.status_code==200
         assert "Email already exists" in data["message"]
