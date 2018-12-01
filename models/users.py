@@ -53,7 +53,7 @@ class users():
             return "The product wasn\'t found."       
     
     def login_user(self,email,password):
-        login_query="SELECT * FROM users WHERE user_email=%s"
+        login_query="""SELECT * FROM users WHERE user_email=%s"""
         self.cur.execute(login_query,[email])
         login_user=self.cur.fetchone()
         if login_user:

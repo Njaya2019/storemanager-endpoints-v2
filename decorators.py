@@ -6,7 +6,7 @@ import jwt
 def token_required(f):
     @wraps(f)
     def decorated_function(*args,**kwargs):
-        token=request.headers.get('X-APP-SECRET')
+        token=request.headers['X-APP-SECRET']
         if token is None:
             return jsonify({'message':'Token is missing'}),403
         try:

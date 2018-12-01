@@ -18,6 +18,7 @@ before_install:
  - psql -c 'CREATE TABLE IF NOT EXISTS sales(sale_id SERIAL PRIMARY KEY,attendant_id INT NOT NULL,product_id INT NOT NULL,sale_quantity INT NOT NULL,tnx_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);' -U postgres
  - psql -c 'CREATE TABLE IF NOT EXISTS users(userid SERIAL PRIMARY KEY,user_fullname VARCHAR(50) NOT NULL,user_email VARCHAR(50) NOT NULL,user_role VARCHAR(50) NOT NULL,user_password TEXT NOT NULL);' -U postgres
  - psql -c 'alter table sales add foreign key (product_id) REFERENCES products(product_id);' -U postgres
+ - psql -c 'INSERT INTO users(user_fullname,user_email,user_role,user_password) VALUES("Andrew Njaya","njayaandrew@andela.com","Admin","1234");' -U postgres
  - git clone -b ft-endpoint-add-user https://github.com/Njaya2019/storemanager-endpoints-v2.git
  - cd storemanager-endpoints-v2
  

@@ -1,13 +1,15 @@
 from flask.views import MethodView
 from flask import request, jsonify, abort
 from models.users import users
+from decorators import token_required
 import jwt
 import datetime
 from Validators.validate_json import validate_json_numeric_value,validate_json_string_value
 
 class user_s(MethodView):
+    decorators=[token_required]
     u=users(full_name=None,email=None,role=None,password=None,confirm_pwd=None)
-    def post(self):
+    def post(self,current_user_id):
         user_name=request.json['user_fullname']
         user_email=request.json['user_email']
         user_role=request.json['user_role']
@@ -27,6 +29,9 @@ class AccessAPI(MethodView):
         user_email=request.json['user_email']
         user_pwd=request.json['user_password']
         u_r=self.u.login_user(user_email,user_pwd)
+        if type(u_r)==dict:
+            print(u_r)
+            return jsonify({'message':u_r})
         token=jwt.encode({'user_id':u_r['userid'], 'exp':datetime.datetime.utcnow()+datetime.timedelta(minutes=30)},'secret',algorithm='HS256')
         return jsonify({'token':token.decode('UTF-8')})
 

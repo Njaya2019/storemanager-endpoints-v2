@@ -1,5 +1,6 @@
 from models.data_base import DataBase
 import psycopg2
+
 d_b=DataBase()
 class products():
     
