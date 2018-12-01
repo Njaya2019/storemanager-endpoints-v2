@@ -23,9 +23,9 @@ class Test_add_user:
         rv=cli.post('/api/v1/admin/login', data=json.dumps(dict(user_email='njayaandrew@companyname.com',user_password='1234')), content_type="application/json")
         data=json.loads(rv.data)
         token=data['token']
-        yield token
-        db=DataBase()
-        db.drop_tables()
+        return token
+        #db=DataBase()
+        #db.drop_tables()
 
 
 
