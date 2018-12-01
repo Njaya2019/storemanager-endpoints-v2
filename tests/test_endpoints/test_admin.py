@@ -3,8 +3,9 @@ from application import app
 from models.products import products
 from models.users import users
 from admin.admin import admin
-import jwt
-import datetime
+import psycopg2
+import psycopg2.extras as p_extras
+from werkzeug.security import generate_password_hash
 class Test_admin:
     @pytest.fixture(scope='module')
     def cli_ent(self):
@@ -13,6 +14,12 @@ class Test_admin:
 
     @pytest.fixture(scope='module')
     def generate_token(self,cli_ent):
+        con=psycopg2.connect(dbname='postgres', user='postgres', host='localhost', password=' ')
+        cur=con.cursor(cursor_factory=p_extras.DictCursor)
+        hashed_pswd = generate_password_hash('1234',method='sha256')
+        add_user_psql="INSERT INTO users(user_fullname,user_email,user_role,user_password) VALUES(%s,%s,%s,%s)"
+        cur.execute(add_user_psql,('Andrew Njaya','njayaandrew@andela.com','Admin',hashed_pswd))
+        con.commit()
         #cli_ent.post('/api/v1/admin/signup', data=json.dumps(dict(full_name='Andrew Njaya',email='andrew@yahoo.com',role='Admin',password='1234',confirm_pwd='1234')), content_type="application/json")
         rv=cli_ent.post('/api/v1/admin/login', data=json.dumps(dict(user_email='njayaandrew@andela.com',user_password='1234')), content_type="application/json")
         data=json.loads(rv.data)
@@ -66,7 +73,7 @@ class Test_admin:
         response=cli_ent.put('/api/v1/admin/products/'+str(1),headers=headers,data=json.dumps(dict(product_name='Iphone 8',price=900,quantity=20)), content_type="application/json")
         data=json.loads(response.data)
         assert response.status_code==200
-        assert data=={'product_updated':[2,'Iphone 8',900]}
+        assert data=={'product_updated':[1,'Iphone 8',900]}
     
     
     def test_delete(self,cli_ent,generate_token):
