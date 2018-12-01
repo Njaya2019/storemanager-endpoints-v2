@@ -32,7 +32,7 @@ class Test_add_user:
     def test_post_user(self,cli,generate_token):
         headers = {'X-APP-SECRET':'{}'.format(generate_token)}
         response=cli.post('/api/v1/admin/signup',headers=headers,data=json.dumps(dict(user_fullname='Darius ndubi',
-        user_email='njayaandrew@and.com',user_role='attendant',user_password='1234',user_confirm_pwd='1234')), content_type="application/json")
+        user_email='njayaandrew@andela.com',user_role='attendant',user_password='1234',user_confirm_pwd='1234')), content_type="application/json")
         data=json.loads(response.data)
         assert response.status_code==200
         assert "Email already exists" in data["message"]
