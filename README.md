@@ -24,7 +24,7 @@
 
 
 ## Test coverage status
-[![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints/badge.png?branch=ft-endpoint-add-user)](https://coveralls.io/github/Njaya2019/storemanager-endpoints?branch=ft-endpoint-add-user)
+[![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints-v2/badge.svg?branch=ft-endpoint-add-user)](https://coveralls.io/github/Njaya2019/storemanager-endpoints-v2?branch=ft-endpoint-add-user)
 
 
 ## Build with
