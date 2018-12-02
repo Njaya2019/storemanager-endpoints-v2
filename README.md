@@ -25,7 +25,7 @@
 
 ## Test coverage status
 [![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints/badge.png?branch=developer)](https://coveralls.io/github/Njaya2019/storemanager-endpoints?branch=developer)
-[![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints-v2/badge.svg?branch=master)](https://coveralls.io/github/Njaya2019/storemanager-endpoints-v2?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints-v2/badge.svg)](https://coveralls.io/github/Njaya2019/storemanager-endpoints-v2)
 
 ## Build with
 ### Flask Web framework 
