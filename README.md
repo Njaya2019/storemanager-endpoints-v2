@@ -20,11 +20,12 @@
   - [ ] DELETE /products/productId
 
 ## Build status
-[![Build Status](https://travis-ci.org/Njaya2019/storemanager-endpoints.svg?branch=developer)](https://travis-ci.org/Njaya2019/storemanager-endpoints)
+[![Build Status](https://travis-ci.org/Njaya2019/storemanager-endpoints-v2.svg?branch=ft-endpoint-add-user)](https://travis-ci.org/Njaya2019/storemanager-endpoints-v2)
 
 
 ## Test coverage status
 [![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints/badge.png?branch=developer)](https://coveralls.io/github/Njaya2019/storemanager-endpoints?branch=developer)
+[![Coverage Status](https://coveralls.io/repos/github/Njaya2019/storemanager-endpoints-v2/badge.svg?branch=master)](https://coveralls.io/github/Njaya2019/storemanager-endpoints-v2?branch=master)
 
 ## Build with
 ### Flask Web framework 
